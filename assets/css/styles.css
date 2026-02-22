@@ -257,6 +257,10 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow);
   overflow: hidden;
 }
+/* Default padding for "text cards" */
+.card:not(.card--media) {
+  padding: 1.1rem;
+}
 .card__title { margin: 0 0 0.35rem; }
 .card__text { margin: 0; color: var(--muted); }
 
