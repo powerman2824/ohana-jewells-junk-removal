@@ -262,6 +262,30 @@ img { max-width: 100%; display: block; }
   padding: 1.1rem;
 }
 .card__title { margin: 0 0 0.35rem; }
+/* Owner title row (name + small avatar) */
+.owner-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* Circular bust photo that matches header text size */
+.owner-avatar {
+  width: 1.55em;
+  height: 1.55em;
+  border-radius: 999px;
+  object-fit: cover;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+
+  /* “hovering” effect */
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.45),
+    0 0 0 3px rgba(53, 194, 255, 0.10);
+
+  transform: translateY(-1px);
+}
 .card__text { margin: 0; color: var(--muted); }
 
 .card--media { background: rgba(255, 255, 255, 0.06); }
