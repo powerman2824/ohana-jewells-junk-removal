@@ -428,7 +428,12 @@ img { max-width: 100%; display: block; }
   flex-wrap: wrap;
 }
 .footer__brand { font-weight: 900; }
-.footer__sub { color: var(--muted); margin-top: 0.25rem; }
+.footer__sub {
+  color: var(--muted);
+  margin-top: 0.25rem;
+  font-size: 0.85rem;       /* smaller text */
+  white-space: nowrap;      /* prevent wrapping */
+}
 .footer__meta { color: var(--muted); text-align: right; }
 .footer__tiny { color: var(--faint); margin-top: 0.3rem; }
 
