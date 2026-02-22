@@ -55,13 +55,13 @@ function setupMascotRotator() {
   if (!img) return;
 
   const frames = [
-    "assets/img/mascot-pointing.png",
-    "assets/img/mascot-loading.png",
-    "assets/img/mascot-job-done.png",
-    "assets/img/mascot-driving.png",
-    "assets/img/mascot-before-after.png",
-    "assets/img/mascot-dumpster.png",
-    "assets/img/mascot-vet.png",
+    "assets/images/mascot-pointing.png",
+    "assets/images/mascot-loading.png",
+    "assets/images/mascot-job-done.png",
+    "assets/images/mascot-driving.png",
+    "assets/images/mascot-before-after.png",
+    "assets/images/mascot-dumpster.png",
+    "assets/images/mascot-vet.png",
   ];
 
   // Preload to avoid flicker
