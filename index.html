@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Ohana Jewells Junk Removal LLC — Veteran owned & operated. We'll Grab Your Junk. Serving East Windsor, CT and surrounding areas." />
+    <title>Ohana Jewells Junk Removal LLC | We'll Grab Your Junk</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Optional: remove if you want no external fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/script.js"></script>
+  </head>
+
+  <body>
+    <!-- Top Bar -->
+    <div class="topbar" role="banner">
+      <div class="container topbar__inner">
+        <div class="topbar__badge">
+          <span class="dot"></span>
+          Veteran Owned & Operated
+        </div>
+
+        <div class="topbar__actions">
+          <!-- Replace with real phone + email when ready -->
+          <a class="topbar__link" href="#quote">Get a Quote</a>
+          <a class="topbar__link" href="#areas">Serving East Windsor, CT (40 mi)</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header / Nav -->
+    <header class="header">
+      <div class="container header__inner">
+        <a class="brand" href="#top" aria-label="Ohana Jewells Junk Removal LLC">
+          <div class="brand__mark" aria-hidden="true">OJ</div>
+          <div class="brand__text">
+            <div class="brand__name">Ohana Jewells</div>
+            <div class="brand__sub">Junk Removal LLC</div>
+          </div>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+
+        <nav id="site-nav" class="nav" aria-label="Primary">
+          <a class="nav__link" href="#services">Services</a>
+          <a class="nav__link" href="#how">How it works</a>
+          <a class="nav__link" href="#areas">Areas</a>
+          <a class="nav__link" href="#about">About</a>
+          <a class="btn btn--primary" href="#quote">Free Quote</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="container hero__inner">
+          <div class="hero__copy">
+            <p class="kicker">Fast • Friendly • Veteran Owned</p>
+            <h1 class="hero__title">
+              We’ll Grab Your Junk.
+              <span class="hero__title-accent">You get your space back.</span>
+            </h1>
+
+            <p class="hero__lead">
+              Junk removal, hauling, and cleanouts within ~40 miles of East Windsor, CT 06088.
+              Same-day and next-day options when available.
+            </p>
+
+            <div class="hero__cta">
+              <a class="btn btn--primary" href="#quote">Request a Free Quote</a>
+              <a class="btn btn--ghost" href="#services">See Services</a>
+            </div>
+
+            <div class="hero__stats" role="list" aria-label="Highlights">
+              <div class="stat" role="listitem">
+                <div class="stat__num">40 mi</div>
+                <div class="stat__label">Service radius</div>
+              </div>
+              <div class="stat" role="listitem">
+                <div class="stat__num">Clean</div>
+                <div class="stat__label">Respectful crews</div>
+              </div>
+              <div class="stat" role="listitem">
+                <div class="stat__num">Fair</div>
+                <div class="stat__label">Upfront pricing</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__media">
+            <div class="card card--media">
+              <div class="media-frame">
+                <img
+                  id="heroMascot"
+                  src="assets/img/mascot-pointing.png"
+                  alt="Ohana Jewells mascot"
+                  loading="eager"
+                />
+              </div>
+
+              <div class="media-caption">
+                <div class="media-caption__title">Quick cleanouts, no drama.</div>
+                <div class="media-caption__sub">Tap “Free Quote” and we’ll take it from there.</div>
+              </div>
+            </div>
+
+            <div class="trust-row" aria-label="Trust indicators">
+              <div class="trust-pill">Veteran Owned</div>
+              <div class="trust-pill">Local Service</div>
+              <div class="trust-pill">Responsible Disposal</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section id="services" class="section">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">Services</h2>
+            <p class="section__sub">
+              From single items to full cleanouts — we load, haul, and leave the area tidy.
+            </p>
+          </div>
+
+          <div class="grid grid--3">
+            <article class="card service">
+              <img class="service__img" src="assets/img/mascot-loading.png" alt="" loading="lazy" />
+              <h3 class="card__title">Junk Removal</h3>
+              <p class="card__text">Furniture, appliances, garage clutter, and general haul-away.</p>
+            </article>
+
+            <article class="card service">
+              <img class="service__img" src="assets/img/mascot-dumpster.png" alt="" loading="lazy" />
+              <h3 class="card__title">Cleanouts</h3>
+              <p class="card__text">Basements, attics, sheds, rentals, and post-move cleanouts.</p>
+            </article>
+
+            <article class="card service">
+              <img class="service__img" src="assets/img/mascot-job-done.png" alt="" loading="lazy" />
+              <h3 class="card__title">Loading & Hauling</h3>
+              <p class="card__text">You point — we lift. Great for bulky or heavy items.</p>
+            </article>
+          </div>
+
+          <div class="note">
+            <strong>Heads up:</strong> Certain items may require special handling/fees (paint, chemicals, etc.).
+            We’ll clarify during the quote.
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section id="how" class="section section--alt">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">How it works</h2>
+            <p class="section__sub">Simple, fast, and transparent — start to finish.</p>
+          </div>
+
+          <ol class="steps">
+            <li class="step card">
+              <div class="step__num">1</div>
+              <h3 class="card__title">Send details</h3>
+              <p class="card__text">Tell us what needs to go. Photos help for accurate pricing.</p>
+            </li>
+            <li class="step card">
+              <div class="step__num">2</div>
+              <h3 class="card__title">Get your quote</h3>
+              <p class="card__text">Upfront estimate based on volume, access, and item types.</p>
+            </li>
+            <li class="step card">
+              <div class="step__num">3</div>
+              <h3 class="card__title">We haul it away</h3>
+              <p class="card__text">We load everything and do a quick sweep so it looks great.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Areas -->
+      <section id="areas" class="section">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">Areas served</h2>
+            <p class="section__sub">
+              Primary operating area: ~40 mile radius of <strong>East Windsor, CT 06088</strong>.
+            </p>
+          </div>
+
+          <div class="card areas">
+            <div class="areas__left">
+              <h3 class="card__title">Common service towns</h3>
+              <p class="card__text">
+                We regularly serve nearby towns and surrounding communities. If you’re unsure, ask —
+                if it’s within range, we’ll make it work.
+              </p>
+
+              <ul class="pill-list" aria-label="Example towns">
+                <li class="pill">East Windsor</li>
+                <li class="pill">Windsor</li>
+                <li class="pill">Enfield</li>
+                <li class="pill">Manchester</li>
+                <li class="pill">Hartford Area</li>
+                <li class="pill">Springfield Area</li>
+              </ul>
+            </div>
+
+            <div class="areas__right">
+              <img src="assets/img/mascot-driving.png" alt="Mascot driving" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="section section--alt">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">About the owner</h2>
+            <p class="section__sub">Local, veteran-owned service you can trust.</p>
+          </div>
+
+          <div class="grid grid--2">
+            <div class="card">
+              <h3 class="card__title">Jason L. Boggus</h3>
+              <p class="card__text">
+                Ohana Jewells Junk Removal LLC is veteran owned and operated. The mission is simple:
+                show up on time, work hard, price fairly, and treat your property with respect.
+              </p>
+              <div class="badge-row">
+                <span class="badge">Veteran Owned</span>
+                <span class="badge">Local Business</span>
+                <span class="badge">Respectful Disposal</span>
+              </div>
+            </div>
+
+            <div class="card card--media">
+              <div class="media-frame">
+                <img src="assets/img/mascot-vet.png" alt="Veteran mascot" loading="lazy" />
+              </div>
+              <div class="media-caption">
+                <div class="media-caption__title">“We’ll Grab Your Junk”</div>
+                <div class="media-caption__sub">Reliable service that keeps it simple.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quote -->
+      <section id="quote" class="section">
+        <div class="container">
+          <div class="section__head">
+            <h2 class="section__title">Request a free quote</h2>
+            <p class="section__sub">
+              Add a short description and how to reach you. (This starter uses a mailto link — we can upgrade to a real form later.)
+            </p>
+          </div>
+
+          <div class="grid grid--2">
+            <form class="card form" id="quoteForm">
+              <label class="field">
+                <span class="field__label">Name</span>
+                <input class="field__input" type="text" name="name" autocomplete="name" placeholder="Your name" required />
+              </label>
+
+              <label class="field">
+                <span class="field__label">Phone or Email</span>
+                <input class="field__input" type="text" name="contact" placeholder="(555) 555-5555 or you@email.com" required />
+              </label>
+
+              <label class="field">
+                <span class="field__label">Job details</span>
+                <textarea class="field__input field__input--textarea" name="details" rows="5" placeholder="What needs to go? Any heavy items? Access notes? Photos available?" required></textarea>
+              </label>
+
+              <button class="btn btn--primary" type="submit">Send Quote Request</button>
+
+              <p class="fineprint">
+                By submitting, you agree to be contacted about your quote request.
+              </p>
+            </form>
+
+            <div class="card">
+              <h3 class="card__title">What to include</h3>
+              <ul class="checklist">
+                <li>Item types (furniture, bags, appliances, etc.)</li>
+                <li>Approximate quantity (single item / 1⁄4 truck / full truck)</li>
+                <li>Location access (stairs, tight hallway, curb pickup)</li>
+                <li>Preferred timeframe (today, this week, weekend)</li>
+              </ul>
+
+              <div class="cta-box">
+                <div class="cta-box__title">Want instant pricing?</div>
+                <p class="cta-box__text">Text photos and we’ll respond with an estimate.</p>
+                <a class="btn btn--ghost" href="#top">Back to top</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>
+          <div class="footer__brand">Ohana Jewells Junk Removal LLC</div>
+          <div class="footer__sub">Veteran owned & operated • East Windsor, CT</div>
+        </div>
+
+        <div class="footer__meta">
+          <div>© <span id="year"></span> Ohana Jewells Junk Removal LLC</div>
+          <div class="footer__tiny">Built for demo on GitHub Pages.</div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
