@@ -327,28 +327,31 @@ img { max-width: 100%; display: block; }
 .media-caption__title { font-weight: 900; }
 .media-caption__sub { color: var(--muted); margin-top: 0.25rem; }
 
+/* Trust Pills - Compact + Centered */
 .trust-row {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+  justify-content: center;  /* centers horizontally */
+  align-items: center;
+  gap: 0.4rem;
   flex-wrap: wrap;
 
-  /* tighter spacing so it doesn't add scroll */
-  padding: 0.45rem 0.75rem 0.2rem;
-  margin-top: -0.25rem; /* tucks it closer to the image */
+  padding: 0.4rem 0 0.3rem; /* tighter vertical spacing */
 }
 
 .trust-pill {
-  padding: 0.22rem 0.55rem;
-  border-radius: 999px;
-
-  font-size: 0.78rem;
+  padding: 0.18rem 0.5rem;  /* smaller bubble */
+  font-size: 0.72rem;       /* smaller text */
   font-weight: 700;
 
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;     /* cylinder shape */
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.04);
   color: var(--muted);
+
+  line-height: 1;
 }
+
 /* Grids */
 .grid { display: grid; gap: 1rem; }
 .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
