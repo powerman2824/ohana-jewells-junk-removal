@@ -610,7 +610,34 @@ img { max-width: 100%; display: block; }
 
 /* Responsive */
 .header__inner { position: relative; }
+.mobile-callbar {
+  display: none;
+}
 
+@media (max-width: 600px) {
+  .mobile-callbar {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, var(--brand), var(--brand-2));
+    text-align: center;
+    padding: 0.85rem;
+    z-index: 100;
+  }
+
+  .mobile-callbar a {
+    color: #071018;
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 1.05rem;
+  }
+
+  body {
+    padding-bottom: 70px; /* prevents content from hiding behind bar */
+  }
+}
 @media (max-width: 920px) {
   .hero__inner { grid-template-columns: 1fr; }
   .grid--3 { grid-template-columns: 1fr; }
