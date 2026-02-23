@@ -285,6 +285,20 @@ img { max-width: 100%; display: block; }
   padding: 0.35rem 0.6rem;
   border-radius: 999px;
 }
+.hero-pill {
+  display: inline-block;
+  margin-top: 1rem;
+
+  font-size: 0.78rem;       /* smaller than kicker */
+  font-weight: 700;
+  color: var(--muted);
+
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
 .hero__title {
   margin: 0 0 0.9rem;
   font-size: clamp(2.2rem, 4vw, 3.2rem);
