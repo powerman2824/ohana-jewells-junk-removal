@@ -59,6 +59,29 @@ body::after {
   background-repeat: repeat;
 }
 
+/* Desktop tuning: wider glows so the background feels aligned on large screens */
+@media (min-width: 900px) {
+  body::before {
+    background:
+      radial-gradient(1200px 700px at 35% -10%, rgba(53, 194, 255, 0.10), transparent 68%),
+      radial-gradient(1100px 700px at 70% 10%, rgba(124, 255, 176, 0.08), transparent 72%),
+      radial-gradient(1000px 800px at 40% 95%, rgba(124, 255, 176, 0.05), transparent 70%);
+  }
+
+  body::after {
+    opacity: 0.05; /* slightly lighter noise on desktop */
+  }
+}
+
+@media (min-width: 1400px) {
+  body::before {
+    background:
+      radial-gradient(1500px 850px at 30% -10%, rgba(53, 194, 255, 0.10), transparent 70%),
+      radial-gradient(1400px 850px at 75% 10%, rgba(124, 255, 176, 0.08), transparent 74%),
+      radial-gradient(1200px 900px at 40% 95%, rgba(124, 255, 176, 0.05), transparent 72%);
+  }
+}
+
 /* Make sure your actual content sits above the noise layer */
 body > * {
   position: relative;
