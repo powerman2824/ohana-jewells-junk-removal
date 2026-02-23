@@ -51,12 +51,19 @@ function setupQuoteFormAjax() {
   const form = document.getElementById("quoteForm");
   if (!form) return;
 
+  const successEl = document.getElementById("quoteSuccess");
+  const errorEl = document.getElementById("quoteError");
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // Hide previous status
+    if (successEl) successEl.hidden = true;
+    if (errorEl) errorEl.hidden = true;
+
     const data = new FormData(form);
 
-    // If you’re compiling a message field, do it here before sending.
+    // Build clean message
     const name = (data.get("name") || "").toString().trim();
     const contact = (data.get("contact") || "").toString().trim();
     const location = (data.get("location") || "").toString().trim();
@@ -86,15 +93,12 @@ Source: Website form`;
 
       if (resp.ok) {
         form.reset();
-        const ok = document.getElementById("quoteSuccess");
-        if (ok) ok.hidden = false;
+        if (successEl) successEl.hidden = false;
       } else {
-        const err = document.getElementById("quoteError");
-        if (err) err.hidden = false;
+        if (errorEl) errorEl.hidden = false;
       }
-    } catch {
-      const err = document.getElementById("quoteError");
-      if (err) err.hidden = false;
+    } catch (err) {
+      if (errorEl) errorEl.hidden = false;
     }
   });
 }
@@ -103,5 +107,5 @@ document.addEventListener("DOMContentLoaded", () => {
   setupYear();
   setupMobileNav();
   setupSmoothScroll();
-  setupQuoteFormMailto();
+  setupQuoteFormAjax(); // <- use this
 });
