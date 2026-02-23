@@ -657,6 +657,10 @@ img { max-width: 100%; display: block; }
   text-align: center;
 }
 
+.form-status { margin: 0.75rem 0 0; font-weight: 700; }
+.form-status--ok { color: rgba(124, 255, 176, 0.9); }
+.form-status--err { color: rgba(255, 120, 120, 0.95); }
+
 /* Mobile footer stack */
 @media (max-width: 700px) {
   .footer__inner {

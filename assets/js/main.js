@@ -47,19 +47,22 @@ function setupSmoothScroll() {
   });
 }
 
-function setupQuoteFormCompileMessage() {
-  const form = $("#quoteForm");
+function setupQuoteFormAjax() {
+  const form = document.getElementById("quoteForm");
   if (!form) return;
 
-  form.addEventListener("submit", () => {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
     const data = new FormData(form);
 
+    // If you’re compiling a message field, do it here before sending.
     const name = (data.get("name") || "").toString().trim();
     const contact = (data.get("contact") || "").toString().trim();
     const location = (data.get("location") || "").toString().trim();
     const details = (data.get("details") || "").toString().trim();
 
-    const msg =
+    const compiled =
 `New Quote Request
 
 Name: ${name || "(not provided)"}
@@ -71,8 +74,28 @@ ${details || "(not provided)"}
 
 Source: Website form`;
 
-    const compiled = document.getElementById("compiledMessage");
-    if (compiled) compiled.value = msg;
+    const msgEl = document.getElementById("compiledMessage");
+    if (msgEl) msgEl.value = compiled;
+
+    try {
+      const resp = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" }
+      });
+
+      if (resp.ok) {
+        form.reset();
+        const ok = document.getElementById("quoteSuccess");
+        if (ok) ok.hidden = false;
+      } else {
+        const err = document.getElementById("quoteError");
+        if (err) err.hidden = false;
+      }
+    } catch {
+      const err = document.getElementById("quoteError");
+      if (err) err.hidden = false;
+    }
   });
 }
 
