@@ -682,14 +682,17 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 600px) {
   .hero-phone {
-    justify-content: center; /* mobile: center it */
-    margin-bottom: 1rem;
+    align-items: center;     /* center stack horizontally */
+    text-align: center;
   }
 
   .hero-phone__link {
-    font-size: 1.02rem;
-    padding: 0.55rem 1.1rem;
-    box-shadow: 0 14px 35px rgba(53, 194, 255, 0.35);
+    align-self: center;      /* ensures pill centers even in flex column */
+  }
+
+  .hero-urgency {
+    padding-left: 0;         /* remove desktop indent */
+    text-align: center;
   }
 }
 
