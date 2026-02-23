@@ -291,12 +291,27 @@
           <div class="section__head">
             <h2 class="section__title">Get Your Free Quote</h2>
             <p class="section__sub">
-              Add a short description and how to reach you.
+              Tell us what you need removed and we’ll reply with a free estimate as soon as possible.
             </p>
           </div>
 
           <div class="grid grid--2">
-            <form class="card form" id="quoteForm">
+            <form
+              class="card form"
+              id="quoteForm"
+              action="https://formspree.io/f/xzdakoke"
+              method="POST"
+            >
+            <!-- Formspree helpers -->
+              <input type="hidden" name="_subject" value="New Quote Request — Ohana Jewells Junk Removal" />
+              <input type="hidden" name="_next" value="https://powerman2824.github.io/ohana-jewells-junk-removal/#quote" />
+
+              <!-- Honeypot spam trap -->
+              <input type="text" name="_gotcha" class="sr-only" tabindex="-1" autocomplete="off" />
+
+              <!-- Compiled message for clean email formatting -->
+              <input type="hidden" name="message" id="compiledMessage" />
+              
               <label class="field">
                 <span class="field__label">Name</span>
                 <input class="field__input" type="text" name="name" autocomplete="name" placeholder="Your name" required />
@@ -305,6 +320,11 @@
               <label class="field">
                 <span class="field__label">Phone or Email</span>
                 <input class="field__input" type="text" name="contact" placeholder="(555) 555-5555 or you@email.com" required />
+              </label>
+
+              <label class="field">
+                <span class="field__label">Pickup town (City / Town)</span>
+                <input class="field__input" type="text" name="location" placeholder="East Windsor, CT" autocomplete="address-level2" />
               </label>
 
               <label class="field">

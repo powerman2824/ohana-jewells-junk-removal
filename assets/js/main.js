@@ -47,30 +47,32 @@ function setupSmoothScroll() {
   });
 }
 
-function setupQuoteFormMailto() {
+function setupQuoteFormCompileMessage() {
   const form = $("#quoteForm");
   if (!form) return;
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
+  form.addEventListener("submit", () => {
     const data = new FormData(form);
+
     const name = (data.get("name") || "").toString().trim();
     const contact = (data.get("contact") || "").toString().trim();
+    const location = (data.get("location") || "").toString().trim();
     const details = (data.get("details") || "").toString().trim();
 
-    const toEmail = "example@domain.com"; // TODO: replace
-    if (toEmail.includes("example@domain.com")) {
-      alert("Email quotes are being set up. Please call or text for the fastest response.");
-      return;
-    }
+    const msg =
+`New Quote Request
 
-    const subject = encodeURIComponent(`Quote Request — ${name || "New Customer"}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nContact: ${contact}\n\nJob Details:\n${details}\n\nService Area: East Windsor, CT (40 mi radius)\n`
-    );
+Name: ${name || "(not provided)"}
+Contact: ${contact || "(not provided)"}
+Pickup town: ${location || "(not provided)"}
 
-    window.location.href = `mailto:${toEmail}?subject=${subject}&body=${body}`;
+Job Details:
+${details || "(not provided)"}
+
+Source: Website form`;
+
+    const compiled = document.getElementById("compiledMessage");
+    if (compiled) compiled.value = msg;
   });
 }
 
