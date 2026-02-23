@@ -592,3 +592,14 @@ img { max-width: 100%; display: block; }
   .nav.is-open { display: flex; }
   .nav__link { padding: 0.65rem 0.7rem; }
 }
+
+@media (max-width: 480px) {
+  .topbar__link {
+    font-size: 0.75rem;     /* smaller */
+    white-space: nowrap;    /* prevent wrapping */
+  }
+
+  .topbar__actions {
+    gap: 0.4rem;            /* tighter spacing */
+  }
+}
