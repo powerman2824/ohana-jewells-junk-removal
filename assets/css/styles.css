@@ -300,21 +300,29 @@ img { max-width: 100%; display: block; }
 
 /* HERO PHONE NUMBER */
 .hero-phone {
-  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: center;   /* centers horizontally */
+  margin-bottom: 1rem;
 }
 
 .hero-phone__link {
-  display: inline-block;
-  padding: 0.4rem 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 
+  padding: 0.55rem 1.1rem;   /* larger */
   border-radius: 999px;
-  font-weight: 800;
-  font-size: 0.95rem;
+
+  font-weight: 900;
+  font-size: 1.05rem;        /* bigger text */
 
   color: #071018;
   background: linear-gradient(90deg, var(--brand), var(--brand-2));
 
-  box-shadow: 0 12px 30px rgba(53, 194, 255, 0.25);
+  box-shadow:
+    0 14px 35px rgba(53, 194, 255, 0.35),
+    0 0 0 2px rgba(255, 255, 255, 0.08);
+
   text-decoration: none;
 }
 
@@ -632,5 +640,12 @@ img { max-width: 100%; display: block; }
   .hero-phone__link {
     font-size: 0.85rem;
     padding: 0.35rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-phone__link {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
   }
 }
