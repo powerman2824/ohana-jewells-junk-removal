@@ -101,6 +101,8 @@ function setupQuoteFormMailto() {
   });
 }
 
+document.getElementById("year").textContent = new Date().getFullYear();
+
 setupYear();
 setupMobileNav();
 setupSmoothScroll();
