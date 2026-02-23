@@ -50,33 +50,6 @@ function setupSmoothScroll() {
   });
 }
 
-function setupMascotRotator() {
-  const img = $("#heroMascot");
-  if (!img) return;
-
-  const frames = [
-    "assets/images/mascot-pointing.png",
-    "assets/images/mascot-loading.png",
-    "assets/images/mascot-job-done.png",
-    "assets/images/mascot-driving.png",
-    "assets/images/mascot-before-after.png",
-    "assets/images/mascot-dumpster.png",
-    "assets/images/mascot-vet.png",
-  ];
-
-  // Preload to avoid flicker
-  frames.forEach((src) => {
-    const pre = new Image();
-    pre.src = src;
-  });
-
-  let i = 0;
-  setInterval(() => {
-    i = (i + 1) % frames.length;
-    img.src = frames[i];
-  }, 4500);
-}
-
 function setupQuoteFormMailto() {
   const form = $("#quoteForm");
   if (!form) return;
@@ -104,5 +77,4 @@ function setupQuoteFormMailto() {
 setupYear();
 setupMobileNav();
 setupSmoothScroll();
-setupMascotRotator();
 setupQuoteFormMailto();
