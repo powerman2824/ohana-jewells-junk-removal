@@ -304,10 +304,18 @@ img { max-width: 100%; display: block; }
 /* HERO PHONE NUMBER (Desktop first) */
 .hero-phone {
   display: flex;
-  justify-content: flex-start; /* desktop: align with hero text */
+  flex-direction: column;     /* stack link + urgency */
+  align-items: flex-start;    /* match left-aligned hero copy */
+  gap: 0.35rem;
   margin-bottom: 0.9rem;
 }
-
+.hero-urgency {
+  margin: 0;
+  padding-left: 0.85rem;      /* small “attached” indent */
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(124, 255, 176, 0.85);
+}
 .hero-phone__link {
   display: inline-flex;
   align-items: center;
