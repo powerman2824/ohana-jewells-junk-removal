@@ -321,6 +321,8 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 0.5rem;
 
+  width: fit-content;
+
   padding: 0.5rem 1rem;
   border-radius: 999px;
 
@@ -682,16 +684,17 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 600px) {
   .hero-phone {
-    align-items: center;     /* center stack horizontally */
+    align-items: center;
+    justify-content: center;
     text-align: center;
   }
 
   .hero-phone__link {
-    align-self: center;      /* ensures pill centers even in flex column */
+    align-self: center;
   }
 
   .hero-urgency {
-    padding-left: 0;         /* remove desktop indent */
+    padding-left: 0;
     text-align: center;
   }
 }
