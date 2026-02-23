@@ -1,5 +1,4 @@
 // Basic UX helpers (no frameworks)
-
 const $ = (sel, root = document) => root.querySelector(sel);
 
 function setupYear() {
@@ -17,7 +16,6 @@ function setupMobileNav() {
     toggle.setAttribute("aria-expanded", String(isOpen));
   });
 
-  // Close on link click (mobile)
   nav.addEventListener("click", (e) => {
     const link = e.target.closest("a");
     if (!link) return;
@@ -25,7 +23,6 @@ function setupMobileNav() {
     toggle.setAttribute("aria-expanded", "false");
   });
 
-  // Close on outside click
   document.addEventListener("click", (e) => {
     if (nav.contains(e.target) || toggle.contains(e.target)) return;
     nav.classList.remove("is-open");
@@ -62,8 +59,11 @@ function setupQuoteFormMailto() {
     const contact = (data.get("contact") || "").toString().trim();
     const details = (data.get("details") || "").toString().trim();
 
-    // Replace this email when you have the business email ready
-    const toEmail = "example@domain.com";
+    const toEmail = "example@domain.com"; // TODO: replace
+    if (toEmail.includes("example@domain.com")) {
+      alert("Email quotes are being set up. Please call or text for the fastest response.");
+      return;
+    }
 
     const subject = encodeURIComponent(`Quote Request — ${name || "New Customer"}`);
     const body = encodeURIComponent(
@@ -74,7 +74,9 @@ function setupQuoteFormMailto() {
   });
 }
 
-setupYear();
-setupMobileNav();
-setupSmoothScroll();
-setupQuoteFormMailto();
+document.addEventListener("DOMContentLoaded", () => {
+  setupYear();
+  setupMobileNav();
+  setupSmoothScroll();
+  setupQuoteFormMailto();
+});
