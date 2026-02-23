@@ -298,6 +298,30 @@ img { max-width: 100%; display: block; }
 .hero__lead { margin: 0 0 1.2rem; color: var(--muted); font-size: 1.05rem; }
 .hero__cta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.2rem 0 1.2rem; }
 
+/* HERO PHONE NUMBER */
+.hero-phone {
+  margin-bottom: 0.75rem;
+}
+
+.hero-phone__link {
+  display: inline-block;
+  padding: 0.4rem 0.85rem;
+
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.95rem;
+
+  color: #071018;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+
+  box-shadow: 0 12px 30px rgba(53, 194, 255, 0.25);
+  text-decoration: none;
+}
+
+.hero-phone__link:hover {
+  filter: brightness(1.05);
+}
+
 /* HERO STATS -> compact pill chips */
 .hero__stats {
   display: flex;
@@ -601,5 +625,12 @@ img { max-width: 100%; display: block; }
 
   .topbar__actions {
     gap: 0.4rem;            /* tighter spacing */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-phone__link {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.75rem;
   }
 }
