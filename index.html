@@ -333,17 +333,22 @@
 
               <button class="btn btn--primary" type="submit">Get My Free Quote</button>
 
-              <p id="quoteSuccess" class="form-status form-status--ok" hidden>
-                ✅ Sent! We’ll reach out shortly.
-              </p>
+              <div id="quoteSuccess" class="alert alert--success" role="status" aria-live="polite" hidden>
+                <div class="alert__icon">✓</div>
+                <div class="alert__body">
+                  <div class="alert__title">Sent! We’ll reach out shortly.</div>
+                  <div class="alert__msg">Prefer faster? Call/text photos for a quick estimate.</div>
+                </div>
+              </div>
 
-              <p id="quoteError" class="form-status form-status--err" hidden>
-                ⚠️ Something went wrong. Please call/text (413) 466-4262.
-              </p>
+              <div id="quoteError" class="alert alert--error" role="status" aria-live="polite" hidden>
+                <div class="alert__icon">!</div>
+                <div class="alert__body">
+                  <div class="alert__title">Something went wrong.</div>
+                  <div class="alert__msg">Please call/text (413) 466-4262 and we’ll get you a quote fast.</div>
+                </div>
+              </div>
 
-              <p class="fineprint">
-                Prefer faster? Call/text photos for an estimate.
-              </p>
             </form>
 
             <div class="card">

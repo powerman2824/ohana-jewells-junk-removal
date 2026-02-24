@@ -595,6 +595,69 @@ img { max-width: 100%; display: block; }
 .cta-box__title { font-weight: 900; }
 .cta-box__text { margin: 0.35rem 0 0.8rem; color: var(--muted); }
 
+/* Keeps layout from jumping when success/error appears */
+.form .alert {
+  margin-top: 12px;
+}
+
+/* Shared alert style */
+.alert {
+  width: 100%;
+  border-radius: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.alert__icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.alert__title {
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.alert__msg {
+  margin-top: 4px;
+  opacity: 0.85;
+  line-height: 1.35;
+  font-size: 0.95rem;
+}
+
+/* Success */
+.alert--success {
+  border-color: rgba(109, 255, 195, 0.35);
+  background: linear-gradient(180deg, rgba(109,255,195,0.14), rgba(0,0,0,0.35));
+}
+.alert--success .alert__icon {
+  background: rgba(109,255,195,0.18);
+  border: 1px solid rgba(109,255,195,0.35);
+}
+
+/* Error */
+.alert--error {
+  border-color: rgba(255, 120, 120, 0.35);
+  background: linear-gradient(180deg, rgba(255,120,120,0.14), rgba(0,0,0,0.35));
+}
+.alert--error .alert__icon {
+  background: rgba(255,120,120,0.16);
+  border: 1px solid rgba(255,120,120,0.35);
+}
+
 /* Footer */
 .footer {
   padding: 2rem 0 1.2rem;
