@@ -116,6 +116,17 @@ function setupQuoteFormAjax() {
     const location = (data.get("location") || "").toString().trim();
     const details = (data.get("details") || "").toString().trim();
 
+    // 🔹 CLEAN PHONE BEFORE SENDING
+    const digits = phone.replace(/\D/g, "");
+
+    if (digits.length === 10) {
+      phone = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+    }
+
+    // Update the actual form input so Formspree receives formatted value
+    const phoneInput = document.getElementById("phoneInput");
+    if (phoneInput) phoneInput.value = phone;
+
     // Parse City + State from "City, ST" or "City ST"
     let city = "";
     let state = "";
@@ -204,5 +215,28 @@ document.addEventListener("DOMContentLoaded", () => {
   setupYear();
   setupMobileNav();
   setupSmoothScroll();
-  setupQuoteFormAjax(); // <- use this
+  setupQuoteFormAjax();
+
+  // 🔹 LIVE PHONE FORMATTER
+  const phoneInput = document.getElementById("phoneInput");
+
+  if (phoneInput) {
+    phoneInput.addEventListener("input", (e) => {
+      let digits = e.target.value.replace(/\D/g, "");
+
+      if (digits.length > 10) digits = digits.slice(0, 10);
+
+      let formatted = digits;
+
+      if (digits.length > 6) {
+        formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+      } else if (digits.length > 3) {
+        formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+      } else if (digits.length > 0) {
+        formatted = `(${digits}`;
+      }
+
+      e.target.value = formatted;
+    });
+  }
 });
