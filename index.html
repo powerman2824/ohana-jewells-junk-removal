@@ -318,9 +318,28 @@
               </label>
 
               <label class="field">
-                <span class="field__label">Phone or Email</span>
-                <input class="field__input" type="text" name="contact" placeholder="(555) 555-5555 or you@email.com" required />
+                <span class="field__label">Phone</span>
+                <input
+                  class="field__input"
+                  type="tel"
+                  name="phone"
+                  placeholder="(555) 555-5555"
+                  autocomplete="tel"
+                  required
+                />
               </label>
+
+              <label class="field">
+                <span class="field__label">Email</span>
+                <input
+                  class="field__input"
+                  type="email"
+                  name="email"
+                  placeholder="you@email.com"
+                  autocomplete="email"
+                  required
+                />
+              </label>              
 
               <label class="field">
                 <span class="field__label">Pickup town (City / Town)</span>

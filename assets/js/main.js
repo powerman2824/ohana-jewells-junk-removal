@@ -102,7 +102,8 @@ function setupQuoteFormAjax() {
 
     // Build clean message
     const name = (data.get("name") || "").toString().trim();
-    const contact = (data.get("contact") || "").toString().trim();
+    const phone = (data.get("phone") || "").toString().trim();
+    const email = (data.get("email") || "").toString().trim();
     const location = (data.get("location") || "").toString().trim();
     const details = (data.get("details") || "").toString().trim();
 
@@ -110,7 +111,8 @@ function setupQuoteFormAjax() {
 `New Quote Request
 
 Name: ${name || "(not provided)"}
-Contact: ${contact || "(not provided)"}
+Phone: ${phone || "(not provided)"}
+Email: ${email || "(not provided)"}
 Pickup town: ${location || "(not provided)"}
 
 Job Details:
