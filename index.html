@@ -301,6 +301,7 @@
               id="quoteForm"
               action="https://formspree.io/f/xzdakoke"
               method="POST"
+              enctype="multipart/form-data"
             >
             <!-- Formspree helpers -->
               <input type="hidden" name="_subject" value="New Quote Request — Ohana Jewells Junk Removal" />
@@ -329,6 +330,18 @@
               <label class="field">
                 <span class="field__label">Job details</span>
                 <textarea class="field__input field__input--textarea" name="details" rows="5" placeholder="What needs to go? Any heavy items? Access notes? Photos available?" required></textarea>
+              </label>
+
+              <label class="field">
+                <span class="field__label">Add photos (optional)</span>
+                <input
+                  class="field__input"
+                  type="file"
+                  name="attachments"
+                  accept="image/*"
+                  multiple
+                />
+                <small class="fineprint">Up to 10 images. Max 25MB each.</small>
               </label>
 
               <button class="btn btn--primary" type="submit">Get My Free Quote</button>

@@ -67,6 +67,39 @@ function setupQuoteFormAjax() {
 
     const data = new FormData(form);
 
+    // Attment data
+    const files = form.querySelector('input[type="file"][name="attachments"]')?.files;
+
+    const MAX_FILES = 10;
+    const MAX_EACH = 25 * 1024 * 1024;  // 25MB
+    const MAX_TOTAL = 100 * 1024 * 1024; // 100MB total request size guideline
+
+    if (files && files.length) {
+      if (files.length > MAX_FILES) {
+        if (errorEl) {
+          errorEl.hidden = false;
+          errorEl.querySelector?.(".alert__title") && (errorEl.querySelector(".alert__title").textContent = "Too many files.");
+          errorEl.querySelector?.(".alert__msg") && (errorEl.querySelector(".alert__msg").textContent = `Please upload ${MAX_FILES} photos or fewer.`);
+        }
+        return;
+      }
+
+      let total = 0;
+      for (const f of files) {
+        total += f.size;
+        if (f.size > MAX_EACH) {
+          if (errorEl) errorEl.hidden = false;
+          // If you're not using the alert markup, just set textContent instead.
+          return;
+        }
+      }
+
+      if (total > MAX_TOTAL) {
+        if (errorEl) errorEl.hidden = false;
+        return;
+      }
+    }
+
     // Build clean message
     const name = (data.get("name") || "").toString().trim();
     const contact = (data.get("contact") || "").toString().trim();
