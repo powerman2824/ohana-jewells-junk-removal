@@ -155,7 +155,7 @@ function setupQuoteFormAjax() {
     const cityClean = (city || "").replace(/[^a-zA-Z0-9]+/g, "");
     const firstClean = (firstName || "").replace(/[^a-zA-Z0-9]+/g, "");
 
-    const contactTag = `${cityClean}${firstClean}`;
+    const contactTag = `${cityClean}_${firstClean}`;
 
     const contactEl = document.getElementById("contactTag");
     if (contactEl) contactEl.value = contactTag;
