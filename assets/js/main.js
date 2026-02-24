@@ -54,10 +54,14 @@ function setupQuoteFormAjax() {
   const successEl = document.getElementById("quoteSuccess");
   const errorEl = document.getElementById("quoteError");
 
+  // ✅ ADD THIS BLOCK RIGHT HERE (initial state on page load)
+  if (successEl) successEl.hidden = true;
+  if (errorEl) errorEl.hidden = true;
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Hide previous status
+    // Hide previous status (keep this)
     if (successEl) successEl.hidden = true;
     if (errorEl) errorEl.hidden = true;
 
@@ -93,11 +97,15 @@ Source: Website form`;
 
       if (resp.ok) {
         form.reset();
+        // ✅ OPTIONAL: explicitly keep the other one hidden
+        if (errorEl) errorEl.hidden = true;
         if (successEl) successEl.hidden = false;
       } else {
+        if (successEl) successEl.hidden = true;
         if (errorEl) errorEl.hidden = false;
       }
     } catch (err) {
+      if (successEl) successEl.hidden = true;
       if (errorEl) errorEl.hidden = false;
     }
   });
