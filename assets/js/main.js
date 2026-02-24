@@ -107,9 +107,25 @@ function setupQuoteFormAjax() {
     const location = (data.get("location") || "").toString().trim();
     const details = (data.get("details") || "").toString().trim();
 
+    // Build contact tag: City + FirstName (e.g., BostonJonny)
+    const firstName = (name.split(/\s+/)[0] || "").trim(); // first word
+    const cityRaw = (location.split(",")[0] || "").trim(); // before comma
+
+    // Remove spaces & non-alphanumerics for a clean tag
+    const cityClean = cityRaw.replace(/[^a-zA-Z0-9]+/g, "");
+    const firstClean = firstName.replace(/[^a-zA-Z0-9]+/g, "");
+
+    // Fallbacks if something is missing
+    const contactTag = `${cityClean || "UnknownCity"}${firstClean || "UnknownName"}`;
+
+    // Write it into the hidden field so Formspree receives it
+    const contactEl = document.getElementById("contactTag");
+    if (contactEl) contactEl.value = contactTag;
+
     const compiled =
 `New Quote Request
 
+Contact Tag: ${contactTag}
 Name: ${name || "(not provided)"}
 Phone: ${phone || "(not provided)"}
 Email: ${email || "(not provided)"}
