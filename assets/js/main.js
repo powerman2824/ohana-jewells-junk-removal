@@ -110,22 +110,28 @@ function setupQuoteFormAjax() {
 
     document.getElementById("firstName").value = first;
     document.getElementById("lastName").value = last;
+    if (firstEl) firstEl.value = first;
+    if (lastEl) lastEl.value = last;
 
-    const phone = (data.get("phone") || "").toString().trim();
+    let phone = (data.get("phone") || "").toString().trim();
     const email = (data.get("email") || "").toString().trim();
     const location = (data.get("location") || "").toString().trim();
     const details = (data.get("details") || "").toString().trim();
 
     // 🔹 CLEAN PHONE BEFORE SENDING
-    const digits = phone.replace(/\D/g, "");
+    let phone = (data.get("phone") || "").toString().trim();
+    let digits = phone.replace(/\D/g, "");
+
+    // Handle leading 1 (optional)
+    if (digits.length === 11 && digits.startsWith("1")) digits = digits.slice(1);
 
     if (digits.length === 10) {
       phone = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
     }
 
     // Update the actual form input so Formspree receives formatted value
-    const phoneInput = document.getElementById("phoneInput");
-    if (phoneInput) phoneInput.value = phone;
+    const phoneInputEl = document.getElementById("phoneInput");
+    if (phoneInputEl) phoneInputEl.value = phone;
 
     // Parse City + State from "City, ST" or "City ST"
     let city = "";
