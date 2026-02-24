@@ -116,18 +116,47 @@ function setupQuoteFormAjax() {
     const location = (data.get("location") || "").toString().trim();
     const details = (data.get("details") || "").toString().trim();
 
+    // Parse City + State from "City, ST" or "City ST"
+    let city = "";
+    let state = "";
+
+    if (location) {
+      if (location.includes(",")) {
+        const [cityPart, restPart = ""] = location.split(",", 2);
+        city = cityPart.trim();
+
+        // Take first token after comma as state (handles "MA", "MA 02101", etc.)
+        const stateToken = restPart.trim().split(/\s+/)[0] || "";
+        state = stateToken.toUpperCase();
+      } else {
+        // If no comma, try "City ST" (last token 2 letters)
+        const parts = location.split(/\s+/).filter(Boolean);
+        const last = parts[parts.length - 1] || "";
+        if (last.length === 2 && /^[a-zA-Z]{2}$/.test(last)) {
+          state = last.toUpperCase();
+          city = parts.slice(0, -1).join(" ");
+        } else {
+          city = location; // fallback
+        }
+      }
+    }
+
+    // Write parsed fields into hidden inputs so Formspree/Airtable receives them
+    const cityEl = document.getElementById("cityField");
+    const stateEl = document.getElementById("stateField");
+    if (cityEl) cityEl.value = city || "";
+    if (stateEl) stateEl.value = state || "";
+
     // Build contact tag: City + FirstName (e.g., BostonJonny)
-    const firstName = (fullName.split(/\s+/)[0] || "").trim(); // first word
-    const cityRaw = (location.split(",")[0] || "").trim(); // before comma
 
-    // Remove spaces & non-alphanumerics for a clean tag
-    const cityClean = cityRaw.replace(/[^a-zA-Z0-9]+/g, "");
-    const firstClean = firstName.replace(/[^a-zA-Z0-9]+/g, "");
+    const firstName = (name.split(/\s+/)[0] || "").trim();
 
-    // Fallbacks if something is missing
+    // Clean for tag: remove spaces/symbols
+    const cityClean = (city || "").replace(/[^a-zA-Z0-9]+/g, "");
+    const firstClean = (firstName || "").replace(/[^a-zA-Z0-9]+/g, "");
+
     const contactTag = `${cityClean || "UnknownCity"}${firstClean || "UnknownName"}`;
 
-    // Write it into the hidden field so Formspree receives it
     const contactEl = document.getElementById("contactTag");
     if (contactEl) contactEl.value = contactTag;
 
