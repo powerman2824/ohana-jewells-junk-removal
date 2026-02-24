@@ -47,115 +47,157 @@ function setupSmoothScroll() {
   });
 }
 
-function setupQuoteFormAjax() {
-  const form = document.getElementById("quoteForm");
-  if (!form) return;
+    // Fecth stuff
+    function setupQuoteFormAjax() {
+    const form = document.getElementById("quoteForm");
+    if (!form) return;
 
-  const successEl = document.getElementById("quoteSuccess");
-  const errorEl = document.getElementById("quoteError");
+    const successEl = document.getElementById("quoteSuccess");
+    const errorEl = document.getElementById("quoteError");
 
-  // ✅ ADD THIS BLOCK RIGHT HERE (initial state on page load)
-  if (successEl) successEl.hidden = true;
-  if (errorEl) errorEl.hidden = true;
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    // Hide previous status (keep this)
+    // Always start hidden
     if (successEl) successEl.hidden = true;
     if (errorEl) errorEl.hidden = true;
 
-    const data = new FormData(form);
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    // Attment data
-    const files = form.querySelector('input[type="file"][name="attachments"]')?.files;
+      if (successEl) successEl.hidden = true;
+      if (errorEl) errorEl.hidden = true;
 
-    const MAX_FILES = 10;
-    const MAX_EACH = 25 * 1024 * 1024;  // 25MB
-    const MAX_TOTAL = 100 * 1024 * 1024; // 100MB total request size guideline
+      // --- File validation (optional) ---
+      const files = form.querySelector('input[type="file"][name="attachments"]')?.files;
+      const MAX_FILES = 10;
+      const MAX_EACH = 25 * 1024 * 1024;   // 25MB
+      const MAX_TOTAL = 100 * 1024 * 1024; // 100MB guideline
 
-    if (files && files.length) {
-      if (files.length > MAX_FILES) {
-        if (errorEl) {
-          errorEl.hidden = false;
-          errorEl.querySelector?.(".alert__title") && (errorEl.querySelector(".alert__title").textContent = "Too many files.");
-          errorEl.querySelector?.(".alert__msg") && (errorEl.querySelector(".alert__msg").textContent = `Please upload ${MAX_FILES} photos or fewer.`);
-        }
-        return;
-      }
-
-      let total = 0;
-      for (const f of files) {
-        total += f.size;
-        if (f.size > MAX_EACH) {
+      if (files && files.length) {
+        if (files.length > MAX_FILES) {
           if (errorEl) errorEl.hidden = false;
-          // If you're not using the alert markup, just set textContent instead.
+          return;
+        }
+        let total = 0;
+        for (const f of files) {
+          total += f.size;
+          if (f.size > MAX_EACH) {
+            if (errorEl) errorEl.hidden = false;
+            return;
+          }
+        }
+        if (total > MAX_TOTAL) {
+          if (errorEl) errorEl.hidden = false;
           return;
         }
       }
 
-      if (total > MAX_TOTAL) {
-        if (errorEl) errorEl.hidden = false;
-        return;
+      // Read raw inputs directly from form (most reliable)
+      const fullNameRaw = (form.querySelector('[name="full_name"]')?.value || "").trim();
+      const emailRaw = (form.querySelector('[name="email"]')?.value || "").trim();
+      const phoneRaw = (form.querySelector('[name="phone"]')?.value || "").trim();
+      const locationRaw = (form.querySelector('[name="location"]')?.value || "").trim();
+      const detailsRaw = (form.querySelector('[name="details"]')?.value || "").trim();
+
+      // --- Name parsing ---
+      const nameParts = fullNameRaw.split(/\s+/).filter(Boolean);
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
+
+      const firstEl = document.getElementById("firstName");
+      const lastEl = document.getElementById("lastName");
+      if (firstEl) firstEl.value = firstName;
+      if (lastEl) lastEl.value = lastName;
+
+      // --- Phone normalize to (555) 555-5555 ---
+      let digits = phoneRaw.replace(/\D/g, "");
+      if (digits.length === 11 && digits.startsWith("1")) digits = digits.slice(1);
+
+      let phoneFormatted = phoneRaw;
+      if (digits.length === 10) {
+        phoneFormatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
       }
-    }
 
-    // Build clean message
+      const phoneInputEl = document.getElementById("phoneInput") || form.querySelector('[name="phone"]');
+      if (phoneInputEl) phoneInputEl.value = phoneFormatted;
 
-    const fullName = (data.get("full_name") || "").toString().trim();
-    const nameParts = fullName.split(/\s+/).filter(Boolean);
-    const first = nameParts[0] || "";
-    const last = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
+      // --- City/State parsing ---
+      let city = "";
+      let state = "";
 
-    // Write parsed name into hidden fields (if present)
-    const firstEl = document.getElementById("firstName");
-    const lastEl = document.getElementById("lastName");
-    if (firstEl) firstEl.value = first;
-    if (lastEl) lastEl.value = last;
+      if (locationRaw) {
+        if (locationRaw.includes(",")) {
+          const [cityPart, restPart = ""] = locationRaw.split(",", 2);
+          city = cityPart.trim();
+          state = (restPart.trim().split(/\s+/)[0] || "").toUpperCase();
+        } else {
+          const locParts = locationRaw.split(/\s+/).filter(Boolean);
+          const lastToken = locParts[locParts.length - 1] || "";
+          if (lastToken.length === 2 && /^[a-zA-Z]{2}$/.test(lastToken)) {
+            state = lastToken.toUpperCase();
+            city = locParts.slice(0, -1).join(" ");
+          } else {
+            city = locationRaw;
+          }
+        }
+      }
 
-    const email = (data.get("email") || "").toString().trim();
-    const location = (data.get("location") || "").toString().trim();
-    const details = (data.get("details") || "").toString().trim();
+      const cityEl = document.getElementById("cityField");
+      const stateEl = document.getElementById("stateField");
+      if (cityEl) cityEl.value = city;
+      if (stateEl) stateEl.value = state;
 
-    // 🔹 CLEAN PHONE BEFORE SENDING
-    let phone = (data.get("phone") || "").toString().trim();
-    let digits = phone.replace(/\D/g, "");
-    if (digits.length === 11 && digits.startsWith("1")) digits = digits.slice(1);
+      // --- Contact tag City_FirstName ---
+      const cityClean = (city || "").replace(/[^a-zA-Z0-9]+/g, "");
+      const firstClean = (firstName || "").replace(/[^a-zA-Z0-9]+/g, "");
+      const contactTag = `${cityClean || "UnknownCity"}_${firstClean || "UnknownName"}`;
 
-    if (digits.length === 10) {
-      phone = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
-    }
+      const contactEl = document.getElementById("contactTag");
+      if (contactEl) contactEl.value = contactTag;
 
-    const phoneInputEl = document.getElementById("phoneInput");
-    if (phoneInputEl) phoneInputEl.value = phone;
+      // --- Compiled message ---
+      const compiled =
+  `New Quote Request
 
-    // Contact tag
-    const cityGuess = (location.split(",")[0] || "").trim();
-    const cityClean = cityGuess.replace(/[^a-zA-Z0-9]+/g, "");
-    const firstClean = first.replace(/[^a-zA-Z0-9]+/g, "");
-    const contactTag = `${cityClean || "UnknownCity"}_${firstClean || "UnknownName"}`;
+  Contact Tag: ${contactTag}
+  Name: ${fullNameRaw || "(not provided)"}
+  Phone: ${phoneFormatted || "(not provided)"}
+  Email: ${emailRaw || "(not provided)"}
+  Pickup town: ${locationRaw || "(not provided)"}
+  Parsed City/State: ${city || "(n/a)"} ${state || ""}
 
-    const contactEl = document.getElementById("contactTag");
-    if (contactEl) contactEl.value = contactTag;
+  Job Details:
+  ${detailsRaw || "(not provided)"}
 
-    const compiled =
-    `New Quote Request
+  Source: Website form`;
 
-    Contact Tag: ${contactTag}
-    Name: ${fullName || "(not provided)"}
-    Phone: ${phone || "(not provided)"}
-    Email: ${email || "(not provided)"}
-    Pickup town: ${location || "(not provided)"}
+      const msgEl = document.getElementById("compiledMessage");
+      if (msgEl) msgEl.value = compiled;
 
-    Job Details:
-    ${details || "(not provided)"}
+      // ✅ IMPORTANT: Build FormData AFTER setting hidden fields / formatted phone
+      const dataToSend = new FormData(form);
 
-    Source: Website form`;
+      try {
+        const resp = await fetch(form.action, {
+          method: "POST",
+          body: dataToSend,
+          headers: { "Accept": "application/json" }
+        });
 
-    const msgEl = document.getElementById("compiledMessage");
-    if (msgEl) msgEl.value = compiled;
+        if (resp.ok) {
+          form.reset();
+          if (errorEl) errorEl.hidden = true;
+          if (successEl) successEl.hidden = false;
+        } else {
+          if (successEl) successEl.hidden = true;
+          if (errorEl) errorEl.hidden = false;
+        }
+      } catch (err) {
+        if (successEl) successEl.hidden = true;
+        if (errorEl) errorEl.hidden = false;
+      }
+    });
+  }
 
-    // Fecth stuff
+    // Fecth STuff
     try {
       const resp = await fetch(form.action, {
         method: "POST",
@@ -176,9 +218,6 @@ function setupQuoteFormAjax() {
       if (errorEl) errorEl.hidden = false;
     }
       
-  });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   setupYear();
   setupMobileNav();
