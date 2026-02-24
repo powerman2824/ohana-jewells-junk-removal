@@ -103,17 +103,16 @@ function setupQuoteFormAjax() {
     // Build clean message
 
     const fullName = (data.get("full_name") || "").toString().trim();
-    const parts = fullName.split(/\s+/).filter(Boolean);
+    const nameParts = fullName.split(/\s+/).filter(Boolean);
+    const first = nameParts[0] || "";
+    const last = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
 
-    const first = parts[0] || "";
-    const last = parts.length > 1 ? parts.slice(1).join(" ") : "";
-
-    document.getElementById("firstName").value = first;
-    document.getElementById("lastName").value = last;
+    // Write parsed name into hidden fields (if present)
+    const firstEl = document.getElementById("firstName");
+    const lastEl = document.getElementById("lastName");
     if (firstEl) firstEl.value = first;
     if (lastEl) lastEl.value = last;
 
-    let phone = (data.get("phone") || "").toString().trim();
     const email = (data.get("email") || "").toString().trim();
     const location = (data.get("location") || "").toString().trim();
     const details = (data.get("details") || "").toString().trim();
@@ -121,89 +120,51 @@ function setupQuoteFormAjax() {
     // 🔹 CLEAN PHONE BEFORE SENDING
     let phone = (data.get("phone") || "").toString().trim();
     let digits = phone.replace(/\D/g, "");
-
-    // Handle leading 1 (optional)
     if (digits.length === 11 && digits.startsWith("1")) digits = digits.slice(1);
 
     if (digits.length === 10) {
       phone = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
     }
 
-    // Update the actual form input so Formspree receives formatted value
     const phoneInputEl = document.getElementById("phoneInput");
     if (phoneInputEl) phoneInputEl.value = phone;
 
-    // Parse City + State from "City, ST" or "City ST"
-    let city = "";
-    let state = "";
-
-    if (location) {
-      if (location.includes(",")) {
-        const [cityPart, restPart = ""] = location.split(",", 2);
-        city = cityPart.trim();
-
-        // Take first token after comma as state (handles "MA", "MA 02101", etc.)
-        const stateToken = restPart.trim().split(/\s+/)[0] || "";
-        state = stateToken.toUpperCase();
-      } else {
-        // If no comma, try "City ST" (last token 2 letters)
-        const parts = location.split(/\s+/).filter(Boolean);
-        const last = parts[parts.length - 1] || "";
-        if (last.length === 2 && /^[a-zA-Z]{2}$/.test(last)) {
-          state = last.toUpperCase();
-          city = parts.slice(0, -1).join(" ");
-        } else {
-          city = location; // fallback
-        }
-      }
-    }
-
-    // Write parsed fields into hidden inputs so Formspree/Airtable receives them
-    const cityEl = document.getElementById("cityField");
-    const stateEl = document.getElementById("stateField");
-    if (cityEl) cityEl.value = city || "";
-    if (stateEl) stateEl.value = state || "";
-
-    // Build contact tag: City + FirstName (e.g., BostonJonny)
-
-    const firstName = (fullName.split(/\s+/)[0] || "").trim();
-
-    // Clean for tag: remove spaces/symbols
-    const cityClean = (city || "").replace(/[^a-zA-Z0-9]+/g, "");
-    const firstClean = (firstName || "").replace(/[^a-zA-Z0-9]+/g, "");
-
-    const contactTag = `${cityClean}_${firstClean}`;
+    // Contact tag
+    const cityGuess = (location.split(",")[0] || "").trim();
+    const cityClean = cityGuess.replace(/[^a-zA-Z0-9]+/g, "");
+    const firstClean = first.replace(/[^a-zA-Z0-9]+/g, "");
+    const contactTag = `${cityClean || "UnknownCity"}_${firstClean || "UnknownName"}`;
 
     const contactEl = document.getElementById("contactTag");
     if (contactEl) contactEl.value = contactTag;
 
     const compiled =
-`New Quote Request
+    `New Quote Request
 
-Contact Tag: ${contactTag}
-Name: ${fullName || "(not provided)"}
-Phone: ${phone || "(not provided)"}
-Email: ${email || "(not provided)"}
-Pickup town: ${location || "(not provided)"}
+    Contact Tag: ${contactTag}
+    Name: ${fullName || "(not provided)"}
+    Phone: ${phone || "(not provided)"}
+    Email: ${email || "(not provided)"}
+    Pickup town: ${location || "(not provided)"}
 
-Job Details:
-${details || "(not provided)"}
+    Job Details:
+    ${details || "(not provided)"}
 
-Source: Website form`;
+    Source: Website form`;
 
     const msgEl = document.getElementById("compiledMessage");
     if (msgEl) msgEl.value = compiled;
 
+    // Fecth stuff
     try {
       const resp = await fetch(form.action, {
         method: "POST",
-        body: new FormData(form),
+        body: data, // ✅ reuse the same FormData
         headers: { "Accept": "application/json" }
       });
 
       if (resp.ok) {
         form.reset();
-        // ✅ OPTIONAL: explicitly keep the other one hidden
         if (errorEl) errorEl.hidden = true;
         if (successEl) successEl.hidden = false;
       } else {
@@ -214,6 +175,7 @@ Source: Website form`;
       if (successEl) successEl.hidden = true;
       if (errorEl) errorEl.hidden = false;
     }
+      
   });
 }
 
