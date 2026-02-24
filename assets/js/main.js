@@ -101,14 +101,23 @@ function setupQuoteFormAjax() {
     }
 
     // Build clean message
-    const name = (data.get("name") || "").toString().trim();
+
+    const fullName = (data.get("full_name") || "").toString().trim();
+    const parts = fullName.split(/\s+/).filter(Boolean);
+
+    const first = parts[0] || "";
+    const last = parts.length > 1 ? parts.slice(1).join(" ") : "";
+
+    document.getElementById("firstName").value = first;
+    document.getElementById("lastName").value = last;
+
     const phone = (data.get("phone") || "").toString().trim();
     const email = (data.get("email") || "").toString().trim();
     const location = (data.get("location") || "").toString().trim();
     const details = (data.get("details") || "").toString().trim();
 
     // Build contact tag: City + FirstName (e.g., BostonJonny)
-    const firstName = (name.split(/\s+/)[0] || "").trim(); // first word
+    const firstName = (fullName.split(/\s+/)[0] || "").trim(); // first word
     const cityRaw = (location.split(",")[0] || "").trim(); // before comma
 
     // Remove spaces & non-alphanumerics for a clean tag
@@ -126,7 +135,7 @@ function setupQuoteFormAjax() {
 `New Quote Request
 
 Contact Tag: ${contactTag}
-Name: ${name || "(not provided)"}
+Name: ${fullName || "(not provided)"}
 Phone: ${phone || "(not provided)"}
 Email: ${email || "(not provided)"}
 Pickup town: ${location || "(not provided)"}

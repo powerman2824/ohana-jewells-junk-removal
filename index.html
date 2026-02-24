@@ -314,8 +314,12 @@
               
               <label class="field">
                 <span class="field__label">Name</span>
-                <input class="field__input" type="text" name="name" autocomplete="name" placeholder="Your name" required />
+                <input class="field__input" type="text" name="full_name" placeholder="Your name" required />
               </label>
+
+              <!-- hidden fields sent to Formspree/Airtable -->
+              <input type="hidden" name="first_name" id="firstName" />
+              <input type="hidden" name="last_name" id="lastName" />
 
               <label class="field">
                 <span class="field__label">Phone</span>
