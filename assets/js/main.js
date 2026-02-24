@@ -149,13 +149,13 @@ function setupQuoteFormAjax() {
 
     // Build contact tag: City + FirstName (e.g., BostonJonny)
 
-    const firstName = (name.split(/\s+/)[0] || "").trim();
+    const firstName = (fullName.split(/\s+/)[0] || "").trim();
 
     // Clean for tag: remove spaces/symbols
     const cityClean = (city || "").replace(/[^a-zA-Z0-9]+/g, "");
     const firstClean = (firstName || "").replace(/[^a-zA-Z0-9]+/g, "");
 
-    const contactTag = `${cityClean || "UnknownCity"}${firstClean || "UnknownName"}`;
+    const contactTag = `${cityClean}${firstClean}`;
 
     const contactEl = document.getElementById("contactTag");
     if (contactEl) contactEl.value = contactTag;
