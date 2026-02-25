@@ -660,7 +660,10 @@ img { max-width: 100%; display: block; }
   border: 1px solid rgba(255,120,120,0.35);
 }
 
-/* Footer */
+/* =========================
+   Footer (Refactored Clean)
+========================= */
+
 .footer {
   padding: 2rem 0 1.2rem;
   border-top: 1px solid rgba(255,255,255,0.10);
@@ -670,8 +673,28 @@ img { max-width: 100%; display: block; }
 .footer__inner {
   display: flex;
   justify-content: space-between;
-  gap: 1.5rem;
   align-items: flex-start;
+  gap: 2rem;
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer__left {
+  align-items: flex-start;
+}
+
+.footer__center {
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__right {
+  align-items: flex-end;
+  text-align: right;
 }
 
 .footer__brand {
@@ -679,24 +702,11 @@ img { max-width: 100%; display: block; }
   font-size: 1.05rem;
 }
 
-.footer__sub {
-  margin-top: 0.25rem;
-  font-size: 0.85rem; /* smaller so it stays one line on mobile */
+.footer__sub,
+.footer__meta,
+.footer__hours {
+  font-size: 0.85rem;
   color: var(--muted);
-}
-
-.footer__meta {
-  margin-top: 0.35rem;
-  font-size: 0.82rem;
-  color: var(--muted);
-}
-
-.footer__right {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  align-items: flex-end;
-  text-align: right;
 }
 
 .footer__phone,
@@ -705,13 +715,16 @@ img { max-width: 100%; display: block; }
   text-decoration: none;
 }
 
-.footer__hours {
-  font-size: 0.82rem;
-  color: var(--muted);
+.footer__link {
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(255,255,255,0.4);
+  padding-bottom: 2px;
+  transition: all 0.2s ease;
 }
 
-.footer__cta {
-  margin-top: 0.25rem;
+.footer__link:hover {
+  border-bottom: 1px solid white;
 }
 
 .footer__bottom {
@@ -722,26 +735,21 @@ img { max-width: 100%; display: block; }
   text-align: center;
 }
 
-.form-status { margin: 0.75rem 0 0; font-weight: 700; }
-.form-status--ok { color: rgba(124, 255, 176, 0.9); }
-.form-status--err { color: rgba(255, 120, 120, 0.95); }
+/* =========================
+   Mobile Footer
+========================= */
 
-/* Mobile footer stack */
 @media (max-width: 700px) {
   .footer__inner {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
   }
 
   .footer__right {
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .footer__sub {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    align-items: center;
+    text-align: center;
   }
 }
 
