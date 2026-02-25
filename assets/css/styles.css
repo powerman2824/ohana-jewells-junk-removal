@@ -758,9 +758,13 @@ img { max-width: 100%; display: block; }
     bottom: 0;
     left: 0;
     right: 0;
+
+    height: 60px;              /* fixed controlled height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background: linear-gradient(90deg, var(--brand), var(--brand-2));
-    text-align: center;
-    padding: 0.85rem;
     z-index: 100;
   }
 
@@ -772,9 +776,10 @@ img { max-width: 100%; display: block; }
   }
 
   body {
-    padding-bottom: 70px; /* prevents content from hiding behind bar */
+    padding-bottom: 60px;      /* match exact height */
   }
 }
+
 @media (max-width: 920px) {
   .hero__inner { grid-template-columns: 1fr; }
   .grid--3 { grid-template-columns: 1fr; }

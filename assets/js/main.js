@@ -197,6 +197,13 @@ Source: Website form`;
 
     // ✅ IMPORTANT: Build FormData AFTER we set hidden fields and formatted phone
     const dataToSend = new FormData(form);
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.textContent : "";
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+    }
 
     try {
       const resp = await fetch(form.action, {
@@ -216,7 +223,13 @@ Source: Website form`;
     } catch (err) {
       if (successEl) successEl.hidden = true;
       if (errorEl) errorEl.hidden = false;
-    }
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+    }  
+
   });
 }
 
