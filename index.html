@@ -303,23 +303,17 @@
               method="POST"
               enctype="multipart/form-data"
             >
-            <!-- Formspree helpers -->
+              <!-- Formspree helpers -->
               <input type="hidden" name="_subject" value="New Quote Request — Ohana Jewells Junk Removal" />
 
               <!-- Honeypot spam trap -->
               <input type="text" name="_gotcha" class="sr-only" tabindex="-1" autocomplete="off" />
-
-              <!-- Compiled message for clean email formatting -->
-              <input type="hidden" name="message" id="compiledMessage" />
               
+              <!-- Visible fields -->
               <label class="field">
                 <span class="field__label">Name</span>
                 <input class="field__input" type="text" name="full_name" placeholder="Your name" required />
               </label>
-
-              <!-- hidden fields sent to Formspree/Airtable -->
-              <input type="hidden" name="first_name" id="firstName" />
-              <input type="hidden" name="last_name" id="lastName" />
 
               <label class="field">
                 <span class="field__label">Phone</span>
@@ -351,9 +345,6 @@
                 <input class="field__input" type="text" name="location" placeholder="East Windsor, CT" autocomplete="address-level2" />
               </label>
 
-              <input type="hidden" name="city" id="cityField" />
-              <input type="hidden" name="state" id="stateField" />
-
               <label class="field">
                 <span class="field__label">Job details</span>
                 <textarea class="field__input field__input--textarea" name="details" rows="5" placeholder="What needs to go? Any heavy items? Access notes? Photos available?" required></textarea>
@@ -367,7 +358,7 @@
                   name="attachments"
                   accept="image/*"
                   multiple
-                />
+                 />
                 <small class="fineprint">Up to 10 images. Max 25MB each.</small>
               </label>
 
@@ -388,8 +379,14 @@
                   <div class="alert__msg">Please call/text (413) 466-4262 and we’ll get you a quote fast.</div>
                 </div>
               </div>
-
-              <input type="hidden" name="contact" id="contactTag" />
+              
+              <!-- Hidden parsed fields -->
+              <input type="hidden" name="first_name" id="firstName">
+              <input type="hidden" name="last_name" id="lastName">
+              <input type="hidden" name="city" id="cityField">
+              <input type="hidden" name="state" id="stateField">
+              <input type="hidden" name="contact" id="contactTag">
+              <input type="hidden" name="message" id="compiledMessage">
 
             </form>
 
